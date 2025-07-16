@@ -17,7 +17,7 @@ data "aws_availability_zones" "available" {}
 ##################################################################################
 locals {
   common_tags = {
-    
+
   }
 }
 
@@ -28,10 +28,10 @@ module "main" {
   name = var.prefix
   cidr = var.cidr_block
 
-  azs                     = slice(data.aws_availability_zones.available.names, 0, length(var.private_subnets))
+  azs                      = slice(data.aws_availability_zones.available.names, 0, length(var.private_subnets))
   private_subnets          = [for k, v in var.private_subnets : v]
   private_subnet_names     = [for k, v in var.private_subnets : "${var.prefix}-${k}"]
-  enable_dns_hostnames    = true
+  enable_dns_hostnames     = true
   private_subnet_suffix    = ""
   private_route_table_tags = { Name = "${var.prefix}-private" }
   # map_private_ip_on_launch = true
